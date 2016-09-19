@@ -17,19 +17,9 @@ session_start();
 		<div class="top-menu">
 			<span class="menu"> </span> 
 			<ul>
-			<?php 
-			if ($_SESSION['fio']==''){
-			?>
-				<li class="active"><a href="index.php">ГЛАВНАЯ</a></li>
+				<li class="active"><a href="index.html">ГЛАВНАЯ</a></li>
 				<li><a href="authoriz.php">Авторизация</a></li>	
 				<li><a href="registrat.php">Регистрация</a></li>
-			<?php
-			}else{
-			?>
-				<li class="active"><a href="index_auth.php">ГЛАВНАЯ</a></li>
-			<?
-			}
-			?>
 				<div class="clearfix"> </div>
 			</ul>
 		</div>
