@@ -1,0 +1,76 @@
+<?php
+session_start();
+?>
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Блог</title>
+<?php 
+	require_once('header.php');
+	include('bd.php');
+?>
+<!---header---->			
+<div class="header">  
+	<div class="container">
+	<!---start-top-nav---->
+		<div class="top-menu">
+			<span class="menu"> </span> 
+			<ul>
+			<?php 
+			if ($_SESSION['fio']==''){
+			?>
+				<li class="active"><a href="index.php">ГЛАВНАЯ</a></li>
+				<li><a href="authoriz.php">Авторизация</a></li>	
+				<li><a href="registrat.php">Регистрация</a></li>
+			<?php
+			}else{
+			?>
+				<li class="active"><a href="index_auth.php">ГЛАВНАЯ</a></li>
+			<?
+			}
+			?>
+				<div class="clearfix"> </div>
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+		<script>
+			$("span.menu").click(function(){
+				$(".top-menu ul").slideToggle("slow" , function(){
+				});
+			});
+		</script>
+		<!---//End-top-nav---->					
+	</div>
+</div>
+<!--/header-->
+<div class="content">
+	<div class="container">
+		<div class="content-grids">
+			<div class="col-md-12 content-main">
+				<div class="content-grid">					 
+<?php 
+            $sql = mysql_query("select user.fio,blog.datab,blog.message from blog left join user on blog.user_id=user.user_id order by 2 DESC;") or die(mysql_error());
+            while ($row = mysql_fetch_assoc($sql)) {
+            		$fio=$row['fio'];
+            		$datab=$row['datab'];
+            		$message=$row['message'];
+?>
+					<div class="content-grid-info">
+						<div class="post-info">
+							<h4><a href=""><? echo $fio;?></a>  <? echo $datab;?></h4>
+					 		<p><?echo $message;?></p>
+						</div>
+					</div>
+<?php 
+};
+?>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+<?php 
+	require_once('footer.php');
+?>
